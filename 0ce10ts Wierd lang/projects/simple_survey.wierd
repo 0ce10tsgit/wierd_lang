@@ -1,0 +1,12 @@
+READ:
+simple_survey
+a simple q and a
+COMMANDS:
+print this is a simple survey answer the questions
+input name name?
+input age age?
+input country country?
+print I finished
+print the users name is $name
+print there $age years old
+print there from $country
