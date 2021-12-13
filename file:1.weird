@@ -6,5 +6,4 @@ var cap 5
 var counter 0
 recur counter++: mani + $counter 1 counter & getv counter
 while l $counter $cap counter++ 1 
-getv counter
 print done

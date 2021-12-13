@@ -377,6 +377,7 @@ def eval_command(command):
     else:
       print("incomplete command: " + content)
   if (not exit):
+    spaced_content[0] = eval_var(spaced_content[0])
     if spaced_content[0] == 'var':
       var(content)
     elif spaced_content[0] == 'getv':
