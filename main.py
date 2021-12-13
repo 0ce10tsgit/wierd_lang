@@ -22,7 +22,8 @@ def eval_var(name):
     return tor 
   except:
     if name[0] == '*':
-      return name[1:]
+        return name[1:]
+        print(name + "sdnjsahdasja")
     if name[0] == '%':
       first = getv_int(getv_int(name[1:])[1])
       if first[0] == 1:
@@ -42,8 +43,9 @@ def inpu(content):
   spaced_content = content.split(' ')
   varx = eval_var(spaced_content[1])
   prompt = spaced_content[2]
-  tostore = input(eval_var(prompt) + ': ')
-  var('var ' + varx + ' ' + tostore) 
+  toprint = 's'
+  vartostore = input(prompt + ':')
+  var('>var ' + varx + ' ' + vartostore)
 def prin(content):
   spaced_content = content.split(' ')
   #print seals are very $OP
@@ -83,10 +85,10 @@ def run_f(lines):
 def read():
   global file
   try:
-    with open(file + '.wierd') as f:
+    with open(file + '.weird') as f:
       lines = f.readlines()
   except:
-      print('failed to find file, check its a .incep file')
+      print('failed to find file, check its a .weird file')
       return 's'
   print('opening file: ' + lines[1] + '...')
   print('file description: ' + lines[2])
@@ -97,7 +99,8 @@ def read():
     run_f(lines)
   else:
      print('ending script')
-  
+def test():
+  input('this is working')
 def if_statment_r(content):
   #if = var1 var2 recur
   spaced_content = content.split(' ')
@@ -330,7 +333,7 @@ def eval_command(command):
     print("no u")
     return "finsished"
   if content == 'test':
-    print('this is indeed working')
+    test()
     return 'S'
   if content == 'Missle':
     print("The missile knows where it is at all times. It knows this because it knows where it isn't, by subtracting where it is, from where it isn't, or where it isn't, from where it is, whichever is greater, it obtains a difference, or deviation. The guidance sub-system uses deviations to generate corrective commands to drive the missile from a position where it is, to a position where it isn't, and arriving at a position where it wasn't, it now is. Consequently, the position where it is, is now the position that it wasn't, and it follows that the position where it was, is now the position that it isn't. In the event of the position that it is in is not the position that it wasn't, the system has required a variation. The variation being the difference between where the missile is, and where it wasn't. If variation is considered to be a significant factor, it too, may be corrected by the GEA. However, the missile must also know where it was. The missile guidance computance scenario works as follows: Because a variation has modified some of the information the missile has obtained, it is not sure just where it is, however it is sure where it isn't, within reason, and it knows where it was. It now subracts where it should be, from where it wasn't, or vice versa. By differentiating this from the algebraic sum og where it shouldn't be, and where it was. It is able to obtain a deviation, and a variation, which is called 'air")
