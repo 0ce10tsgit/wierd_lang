@@ -84,10 +84,10 @@ def run_f(lines):
 def read():
   global file
   try:
-    with open(file + '.wierd') as f:
+    with open(file + '.weird') as f:
       lines = f.readlines()
   except:
-      print('failed to find file, check its a .incep file')
+      print('failed to find file, check its a .weird file')
       return 's'
   try:
     lines[0:]
