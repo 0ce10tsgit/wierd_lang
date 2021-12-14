@@ -33,9 +33,3 @@ print want to view the results?
 input should_show view?(y/n)
 // start view results chain
 if = $should_show y do_show
-recur dont_show: print alr then & terminate
-if = $should_show n dont_show
-print close program?
-input do_close terminate(y/n)?
-recur close: terminate
-if = $do_close y close
