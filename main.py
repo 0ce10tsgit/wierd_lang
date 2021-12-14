@@ -6,7 +6,7 @@ wantsElse = False
 variables = []
 file = 'main'
 recur = []
-do_debug_out = False
+do_debug_out = True
 jokes = ['Why was the cow afraid? He was a cow-herd.','What dog keeps the best time? A watch dog.','What did one plate say to the other? Lunch is on me.','How do you make a good egg roll? You push it down a hill.','What do you call a fake noodle? An im-pasta.']
 print("made by 0ce10t")
 print("type : '>help' for help")
@@ -164,14 +164,18 @@ def if_statment(content):
   else:
     output_method("returned False")
 def concation(content):
-  #conc s s variable
+  #conc var *s
   spaced_content = content.split(' ')
-  try: 
-    var('>var ' + str(eval_var(spaced_content[3])) + ' ' +str(eval_var(spaced_content[1])) + str(eval_var(spaced_content[2])))
-  except:
-    print('Failed to concate')
+  len_ = len(spaced_content)-1
+  var_ = eval_var(spaced_content[1])
+  num = 0
+  toconc = ''
+  while num < len_:
+    toconc += str(spaced_content[num+1])
+    num += 1
+  var('var ' + var_ + ' ' + toconc)
   output_method("concated")
-  return 'done'
+
 def recursion(content):
   global recursion
   hasSpace = True
