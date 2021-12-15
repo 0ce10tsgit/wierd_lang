@@ -1,3 +1,4 @@
+print('package time D:')
 import time
 import random
 isrunning = True
@@ -6,11 +7,77 @@ wantsElse = False
 variables = []
 file = 'main'
 recur = []
-do_debug_out = True
+arrays = []
+do_debug_out = False
 jokes = ['Why was the cow afraid? He was a cow-herd.','What dog keeps the best time? A watch dog.','What did one plate say to the other? Lunch is on me.','How do you make a good egg roll? You push it down a hill.','What do you call a fake noodle? An im-pasta.']
 print("made by 0ce10t")
 print("type : '>help' for help")
 print("input command")
+def arr_eval(content):
+  global arrays
+  try:
+    spaced_content = content.split(' ')
+    action = eval_var(spaced_content[1])
+    name = eval_var(spaced_content[2])
+    val = eval_var(spaced_content[3])
+  except:
+    print("all args not met")
+  num = 0
+  while num<len(arrays):
+    if name == arrays[num][0]:
+      break
+    else:
+      num += 1
+  if action == "app" or action == 'append':
+    arrays[num].append(val)
+    print('append')
+  elif action == 'rep' or action == 'replace':
+    arrays[num][eval_var(spaced_content[4])] = val
+    print('replace')
+#mod_arr append/replace nase val index 
+def arr_check(name):
+  global arrays
+  items = len(arrays)
+  num = 0
+  while num<items:
+    if arrays[num][0] == name:
+      arr = [True,num]
+      return arr
+    else:
+      num += 1
+  arr = [False,'dummy']
+  return arr
+def array_get(name,index):
+  global arrays
+  items = len(arrays)
+  num = 0
+  while num<items:
+    if arrays[num][0] == name:
+      return arrays[num][index]
+    else:
+      num += 1
+  print('failed to find an array with that name')
+  return False
+def array_m(content):
+  global arrays
+  #array seal []
+  spaced_content = content.split(" ")
+  name = eval_var(spaced_content[1]) 
+    
+  items = len(spaced_content)-2
+  items_to_add = spaced_content[2:]
+  num = 0
+  arr = [] 
+  arr.append(name)
+  while num < items:
+    arr.append(eval_var(items_to_add[num]))
+    num += 1
+  cek = arr_check(name)
+  if cek[0]:
+     arrays[cek[1]] = arr
+     print('replaced value')
+  else:
+    arrays.append(arr)
 def output_method(tprint):
   global do_debug_out
   if do_debug_out:
@@ -23,6 +90,8 @@ def eval_var(name):
   except:
     if name[0] == '*':
       return name[1:]
+    if name[0] == '^':
+      return array_get((name[2:]),int(name[1]))
     if name[0] == '%':
       first = getv_int(getv_int(name[1:])[1])
       if first[0] == 1:
@@ -397,6 +466,10 @@ def eval_command(command):
         prin(content)
     elif spaced_content[0] == 'input':
         inpu(content)
+    elif spaced_content[0] == 'mod_arr':
+        arr_eval(content)
+    elif spaced_content[0] == 'array':
+      array_m(content)
     elif spaced_content[0] == 'file':
       print("switched from file: " + file + " to " + spaced_content[1])
       file = spaced_content[1]
