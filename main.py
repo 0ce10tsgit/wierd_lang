@@ -11,6 +11,7 @@ arrays = []
 do_debug_out = False
 jokes = ['Why was the cow afraid? He was a cow-herd.','What dog keeps the best time? A watch dog.','What did one plate say to the other? Lunch is on me.','How do you make a good egg roll? You push it down a hill.','What do you call a fake noodle? An im-pasta.']
 print("made by 0ce10t")
+print('github.com/0ce10tsgit/wierd_lang')
 print("type : '>help' for help")
 print("input command")
 def arr_eval(content):
@@ -90,6 +91,10 @@ def eval_var(name):
   except:
     if name[0] == '*':
       return name[1:]
+    if name[0] == '@':
+      return len(eval_var(name[1:]))
+    if name[0] == '#':
+      return random.randint(0,10) 
     if name[0] == '^':
       return array_get((name[2:]),int(name[1]))
     if name[0] == '%':
