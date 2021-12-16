@@ -2,18 +2,3 @@ READ
 main
 main
 COMMANDS:
-var x 5
-var y 5
-array row1 # # # # #
-array row2 # # # # #
-array row3 # # # # #
-array row4 # # # # #
-array row5 # # # # #c
-recur reset5: array row1 # # # # # & print arrays reset
-recur reset4: array row2 # # # # # & recur_r reset5
-recur reset3: array row3 # # # # # & recur_r reset4
-recur reset2: array row4 # # # # # & recur_r reset3
-recur reset: array row5 # # # # # & recur_r reset2
-recur render: recur_r reset & recur_r render1 
-recur chg2: conc torowy row $y & recur_r render
-recur chg: conc torowx row $x & recur_r chg2 

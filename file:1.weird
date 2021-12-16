@@ -1,8 +1,8 @@
 READ:
 test_file
 A file for a counter
-COMMANDS: 
-print what should I count to?
+COMMANDS:
+print what should I count to>
 input amount time?
 var cap $amount
 var counter 0
