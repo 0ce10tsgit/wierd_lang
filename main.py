@@ -13,7 +13,7 @@ jokes = ['Why was the cow afraid? He was a cow-herd.','What dog keeps the best t
 print("made by 0ce10t")
 print('github.com/0ce10tsgit/wierd_lang')
 print("type : '>help' for help")
-print("input command")
+print("input command")      
 def arr_eval(content):
   global arrays
   try:
@@ -64,7 +64,6 @@ def array_m(content):
   #array seal []
   spaced_content = content.split(" ")
   name = eval_var(spaced_content[1]) 
-    
   items = len(spaced_content)-2
   items_to_add = spaced_content[2:]
   num = 0
@@ -84,13 +83,15 @@ def output_method(tprint):
   if do_debug_out:
     print(tprint)
 def eval_var(name):
-  global varaibles
+  global variables
+  global arrays
+
   try:
     tor = int(name)
     return tor 
   except:
     if name[0] == '*':
-      return name[1:]
+      return name[1:] 
     if name[0] == '@':
       return len(eval_var(name[1:]))
     if name[0] == '#':
