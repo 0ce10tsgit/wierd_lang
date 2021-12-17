@@ -8,6 +8,8 @@ variables = []
 file = 'main'
 recur = []
 arrays = []
+mem1 = []
+mem2 = []
 do_debug_out = False
 jokes = ['Why was the cow afraid? He was a cow-herd.','What dog keeps the best time? A watch dog.','What did one plate say to the other? Lunch is on me.','How do you make a good egg roll? You push it down a hill.','What do you call a fake noodle? An im-pasta.']
 print("made by 0ce10t")
@@ -64,7 +66,6 @@ def array_m(content):
   #array seal []
   spaced_content = content.split(" ")
   name = eval_var(spaced_content[1]) 
-    
   items = len(spaced_content)-2
   items_to_add = spaced_content[2:]
   num = 0
@@ -181,8 +182,8 @@ def if_statment_r(content):
   #if = var1 var2 recur
   spaced_content = content.split(' ')
   check_type = spaced_content[1]
-  var1 = eval_var(spaced_content[2])
-  var2 = eval_var(spaced_content[3])
+  var1 = int(eval_var(spaced_content[2]))
+  var2 = int(eval_var(spaced_content[3]))
   result = False
   if check_type == '=':
     if var1 == var2:
@@ -247,7 +248,7 @@ def concation(content):
   while num < len_:
     toconc += str(spaced_content[num+1])
     num += 1
-  var('var ' + var_ + ' ' + toconc)
+  var('var ' + str(var_) + ' ' + toconc)
   output_method("concated")
 
 def recursion(content):

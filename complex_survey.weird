@@ -4,32 +4,33 @@ A very complex version of simple_survey
 COMMANDS:
 input needed needed?
 // init amount made and get how many the user wants
-var amount_needed $needed
-var amount_made 0
-input u_prompt prompt?
-var current_respsonse_int 0
+//var amount_needed $needed
+//var amount_made 0
+//input u_prompt prompt?
+//var current_respsonse_int 0
 // prompt the user with the prompt and store it at the given name value (this recur chain has to be read bottom to top)
-recur prompt: input $store $u_prompt & mani + $amount_made 1 amount_made
+//recur prompt: input $store $u_prompt & mani + $amount_made 1 amount_made
 //change the variable storage name 
-recur conc_new_num: conc store res $current_respsonse_int & recur_r prompt
+//recur conc_new_num: conc $current_respsonse_int store res & recur_r prompt
 // Increment how many responses have been made
-recur increment_res: mani + $current_respsonse_int 1 current_respsonse_int & recur_r conc_new_num
+//recur increment_res: mani + $current_respsonse_int 1 current_respsonse_int & recur_r conc_new_num
 //get inputs
-while l $amount_made $amount_needed increment_res 1
+//while l $amount_made $amount_needed increment_res 1
 //done collecting
-print all $amount_needed made
-var current_respsonse_int 0
-var amount_made 0
+//print all $amount_needed made
+//var current_respsonse_int 0
+//var amount_made 0
 // reinitilize needed vars
 // increment the amount made and tell the vlaue of the respone with matching name
-recur ac_show: mani + $amount_made 1 amount_made & print response number $current_respsonse_int is %store 
+//recur ac_show: mani + $amount_made 1 amount_made & print response number $current_respsonse_int is %store 
 // concat new name
-recur conc_new_num2: conc store res $current_respsonse_int & recur_r ac_show
+//recur conc_new_num2: conc $current_respsonse_int store res & recur_r ac_show
 // incremetn what response where on
-recur increment_res2: mani + $current_respsonse_int 1 current_respsonse_int & recur_r conc_new_num2
+//recur increment_res2: mani + $current_respsonse_int 1 current_respsonse_int & recur_r conc_new_num2
 // initilize this chain if the below if statement is true
-recur do_show: while l $amount_made $amount_needed increment_res2 1
-print want to view the results?
-input should_show view?(y/n)
+//recur do_show: while l $amount_made $amount_needed increment_res2 1
+//print want to view the results?
+//input should_show view?(y/n)
 // start view results chain
-if = $should_show y do_show
+//if = $should_show y do_show
+print this thing is broken as d
