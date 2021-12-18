@@ -1,0 +1,9 @@
+READ:
+idk
+idk what this is 
+COMMANDS:
+var toprint sela
+array stuf # # # # #
+var row 0
+recur conca: conc ah ^1stuf ^2stuf ^3stuf ^4stuf ^5stuf & print $ah
+print $ah

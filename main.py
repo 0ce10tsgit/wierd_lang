@@ -8,8 +8,6 @@ variables = []
 file = 'main'
 recur = []
 arrays = []
-mem1 = []
-mem2 = []
 do_debug_out = False
 jokes = ['Why was the cow afraid? He was a cow-herd.','What dog keeps the best time? A watch dog.','What did one plate say to the other? Lunch is on me.','How do you make a good egg roll? You push it down a hill.','What do you call a fake noodle? An im-pasta.']
 print("made by 0ce10t")
@@ -33,10 +31,8 @@ def arr_eval(content):
       num += 1
   if action == "app" or action == 'append':
     arrays[num].append(val)
-    print('append')
   elif action == 'rep' or action == 'replace':
     arrays[num][eval_var(spaced_content[4])] = val
-    print('replace')
 #mod_arr append/replace nase val index 
 def arr_check(name):
   global arrays
@@ -94,8 +90,6 @@ def eval_var(name):
       return name[1:]
     if name[0] == '@':
       return len(eval_var(name[1:]))
-    if name[0] == '#':
-      return random.randint(0,10) 
     if name[0] == '^':
       return array_get((name[2:]),int(name[1]))
     if name[0] == '%':
@@ -117,7 +111,7 @@ def inpu(content):
   spaced_content = content.split(' ')
   varx = eval_var(spaced_content[1])
   prompt = spaced_content[2]
-  tostore = input(eval_var(prompt) + ': ')
+  tostore = input(str(eval_var(prompt)) + ': ')
   var('var ' + varx + ' ' + tostore) 
 def prin(content):
   spaced_content = content.split(' ')
@@ -239,14 +233,15 @@ def if_statment(content):
   else:
     output_method("returned False")
 def concation(content):
-  #conc var *s
+  #conc var hai hai hai 
   spaced_content = content.split(' ')
-  len_ = len(spaced_content)-1
+  len_ = len(spaced_content)-2
   var_ = eval_var(spaced_content[1])
   num = 0
   toconc = ''
   while num < len_:
-    toconc += str(spaced_content[num+1])
+    print(spaced_content[num+2])
+    toconc += str(eval_var(spaced_content[num+2]))
     num += 1
   var('var ' + str(var_) + ' ' + toconc)
   output_method("concated")
@@ -351,12 +346,20 @@ def recur_r(content):
         spaced_2 = recur[num].split(':')[1].split('&')
         c1 = spaced_2[0] #.split(' ')[0]
         if c1.count(" ") >= 2:
-          c1 = c1.lstrip(' ')
+          try:
+            c1 = c1.lstrip(' ')
+            c1 = c1.rstrip(' ')
+          except:
+            ahhh = 'kill me'
         else:
           c1 = spaced_2[0].split(' ')[0]
         c2 = spaced_2[1] #.split(' ')[1]
         if c2.count(" ") >= 2:
-          c2 = c2.lstrip(' ')
+          try:
+            c2 = c2.lstrip(' ')
+            c2 = c2.rstrip(' ')
+          except:
+            ahhhhh = 'pain'
         else:
           c2 = spaced_2[1].split(' ')[1]
         output_method("running first command")
