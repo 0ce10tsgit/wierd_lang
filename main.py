@@ -23,6 +23,7 @@ def arr_eval(content):
     val = eval_var(spaced_content[3])
   except:
     print("all args not met")
+    return 'finch'
   num = 0
   while num<len(arrays):
     if name == arrays[num][0]:
@@ -32,8 +33,8 @@ def arr_eval(content):
   if action == "app" or action == 'append':
     arrays[num].append(val)
   elif action == 'rep' or action == 'replace':
-    arrays[num][eval_var(spaced_content[4])] = val
-#mod_arr append/replace nase val index 
+    arrays[num][int(eval_var(spaced_content[4]))] = val
+#mod_arr append/replace name val index 
 def arr_check(name):
   global arrays
   items = len(arrays)
@@ -240,12 +241,10 @@ def concation(content):
   num = 0
   toconc = ''
   while num < len_:
-    print(spaced_content[num+2])
     toconc += str(eval_var(spaced_content[num+2]))
     num += 1
   var('var ' + str(var_) + ' ' + toconc)
   output_method("concated")
-
 def recursion(content):
   global recursion
   hasSpace = True
@@ -277,6 +276,7 @@ def getv_int(name):
   return arr
 def manipulate(content):
     spaced_content = content.split(' ')
+    spaced_content[1] = eval_var(spaced_content[1])
     try: 
       add1 = eval_var(spaced_content[2])
       add2 = eval_var(spaced_content[3])
@@ -288,11 +288,16 @@ def manipulate(content):
     if spaced_content[1] == '*':
         result = add1 * add2
     elif spaced_content[1] == '/':
-        result = add1/add2
+      if add2 == 0:
+        print("u bastard")
+        return ">:("
+      result = add1/add2
     elif spaced_content[1] == '+':
         result = add1+add2
     elif spaced_content[1] == '-':
         result = add1-add2
+    else:
+      print('content is ' + spaced_content[1])
     var(('var ' + eval_var(spaced_content[4]) + " " + str(result)))
 def getv(content):
   global variables
@@ -369,10 +374,7 @@ def recur_r(content):
         return "done"
       else:
         output_method("running recursive command")
-        try:
-          eval_command('>'+str(recur[num].split(':')[1]))
-        except:
-          print('failed make sure the return variable is registerd right')
+        eval_command('>'+str(recur[num].split(':')[1]))
         return "complete"
     else:
       num += 1
@@ -492,7 +494,7 @@ def prompt(prompt):
   command = input(prompt)
   return command
 while isrunning:
-  time.sleep(0.5)
+  time.sleep(0.1)
   if not hasPrompted:
     command = prompt(file + "{")
     if (command.startswith(">")):

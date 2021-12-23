@@ -1,0 +1,10 @@
+READ:
+A_File
+idk what this us
+COMMANDS:
+var main #
+var main2 ()
+recur prin: print $main2 & print $main
+recur seal: conc main2 $main2 () & recur_r prin
+recur add: conc main $main # & recur_r seal
+while l 1 10 add 1

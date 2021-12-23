@@ -2,8 +2,11 @@ READ:
 idk
 idk what this is 
 COMMANDS:
-var toprint sela
-array stuf # # # # #
-var row 0
-recur conca: conc ah ^1stuf ^2stuf ^3stuf ^4stuf ^5stuf & print $ah
-print $ah
+print this is a calcuator :) 
+print enter operation (*/-+)
+input operator operation?
+input operand1 operand1?
+input operand2 operand2?
+mani $operator $operand1 $operand2 result
+print $result
+seal
