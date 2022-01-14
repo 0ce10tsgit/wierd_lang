@@ -1,7 +1,0 @@
-var seal 0
-print $seal
-fn test print $seal & print kil me
-run test
->asfs
->>asfas
-//
