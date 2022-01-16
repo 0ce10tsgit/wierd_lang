@@ -1,0 +1,7 @@
+{
+    "do_break_math": false,
+    "do_preload" : false,
+    "preload_file" :  "main",
+    "auto_start" : true,
+    "allow_failure" : true
+}

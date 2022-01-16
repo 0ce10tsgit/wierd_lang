@@ -1,7 +1,0 @@
-array board # # # # #
-var crd 3
-run compile_board
-print ^board
-fn inpu input head left or right? & if $head == > var crd ($crd_+_1) & if $head == < var crd ($crd_-_1) & run compile_board
-fn compile_board array board # # # # # & insert board $crd @ & concat tocomp ^seal|1 ^seal|2 ^seal|3 ^seal|4 ^seal|5 & print $tocomp
-while 1 < 2 1 run inpu

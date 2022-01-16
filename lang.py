@@ -1,5 +1,6 @@
 import time
 import random
+import json
 is_doing_shit = True
 variables = []
 fns = []
@@ -65,11 +66,11 @@ def while_state(*endme):
   try:
     var1 = int(var1)
   except:
-    placeholder = ':((((((('
+    pass
   try:
     var2 = int(var2)
   except:
-    placeholder = ':)))))))'
+    pass
   while cond(var1,var2,condition):
     rd_line(torun)
     time.sleep(int(delay))
@@ -97,7 +98,7 @@ def read_array(wholething):
   global arrays
   index = ''
   name = ''
-  anum = -1
+  anum = 0
   before = True
   for char in wholething:
     if char == '|':
@@ -107,14 +108,15 @@ def read_array(wholething):
     elif not before:
       index += char
   index = eval_key(index)
-  name = eval_key(index)
+  name = eval_key(name)
+  acnum = None
   for arr in arrays:
-    if arr[0].split(":")[0] == name:
-      break
+    if arr[0] == name:
+      acnum = anum
     anum += 1
-  if name == '':
-    return arrays[anum][1:]
-  return arrays[anum][int(index)]
+  if index == '':
+    return arrays[acnum][1:]
+  return arrays[acnum][int(index)]
 def array_make(name,*items):
   global arrays
   temp = [name]
@@ -128,7 +130,7 @@ def array_make(name,*items):
     num += 1
   arrays.append(temp)    
 def read_f(name):
-    with open(name + '.txt') as file:
+    with open('projects/' + name + '.txt') as file:
       lines = file.readlines()
       output_method('start of: ' + name + '---------')
       for line in lines:
@@ -160,7 +162,25 @@ def make_function(name,*args):
     num += 1
   fns.append(name + ':' + toapp.rstrip())
 def manipulate(equation):
-  actual_stuf = equation[1:len(equation)-1].split('_')
+  #actual_stuf = equation[1:len(equation)-1].split('_')
+  if settings['do_break_math']:
+      actual_stuf = equation[1:len(equation)-1].split('_')
+  else:
+    actual_stuf = []
+    single_out = equation[1:len(equation)-1]
+    isoperand = False
+    temp = ''
+    for char in single_out:
+        if char == '+' or char == '-' or char == '*' or char == '/':
+            actual_stuf.append(temp)
+            temp = ''
+            isoperand = True
+            actual_stuf.append(char)
+        else:
+            isoperand = False
+            if not isoperand:
+                temp += char
+    actual_stuf.append(temp)
   sort_num = 0
   result = None
   actual_stuf[1] = eval_key(actual_stuf[1])
@@ -200,6 +220,8 @@ def get_variable(name):
       return vari.split(":")[1]
   return False
 def eval_key(keyword):
+  if keyword == '':
+    return keyword
   global variables
   if keyword.startswith('*'):
     return keyword[1:]
@@ -252,7 +274,19 @@ def rd_line(line):
       eval(cmd_do + '(' + tosend + ')')
       return True
   output_method("failed")
+#stuf = ['Important messages about lang:','required: time module','incomplete: random ints not added yet but module is imported anywat for future use','incomplete: math function does not currently support equation in equation']
 def start():
   global is_doing_shit
   while is_doing_shit:
     rd_line(input_method("cmd? "))
+settings = None
+with open('lang_config.json') as config:
+    settings = json.load(config)
+if settings['auto_start']:
+    if settings['allow_failure']:
+        start()
+    else:
+        try:
+            start()
+        except:
+            output_method('the program failed')

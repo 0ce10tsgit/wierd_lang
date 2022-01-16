@@ -1,0 +1,4 @@
+array seal 1 2 3
+array panda # # #
+print ^seal|1
+print ^panda|1
