@@ -5,12 +5,40 @@ is_doing_shit = True
 variables = []
 fns = []
 arrays = []
-store_exceptions = ['make_function']
+before_listeners = []
+after_listeners = []
+store_exceptions = ['make_function','while_state','for_state']
 def output_method(content):
   print(content)
 def input_method(prompt):
   return input(prompt)
-commands = ['print:do_print','var:make_variable','concat:concat','fn:make_function','run:run_f','read:read_f','array:array_make','if:if_state','while:while_state','input:input_state','insert:insert','append:app','randint:rand']
+commands = ['print:do_print','var:make_variable','concat:concat','fn:make_function','run:run_f','read:read_f','array:array_make','if:if_state','while:while_state','input:input_state','insert:insert','append:app','randint:rand','sleep:slep','for:for_state']
+def until_state(*kazoo):
+  #until after func :
+  pass
+  if kazoo[0] == 'after':
+    pass
+def for_state(*idk):
+  #for item in array
+  item_name = eval_key(idk[0])
+  w_array = eval_key(idk[2])
+  code = ''
+  for seal in idk[3:]:
+    code += seal + ' '
+  global arrays
+  num = 0
+  for arr in arrays:
+    if arr[0] == w_array:
+      break
+    else:
+      num += 1
+  for thingy in arrays[num-1][1:]:
+    make_variable(item_name,thingy)
+    rd_line(code)
+def slep(whenindoubtseal):
+  time.sleep(int(whenindoubtseal))
+def rand(*shit):
+  make_variable(shit[0],str(random.randint(int(shit[1]),int(shit[2]))))
 def app(*iaintgonnaliveforever):
   global arrays
   for arr in arrays:
@@ -25,7 +53,7 @@ def insert(*s):
   for arr in arrays:
     if arr[0] == s[0]:
       arr[int(s[1])] = s[2]
-      return 's'
+      return None
   output_method('failed')
 def input_state(*itsmylife):
   variable = itsmylife[0]
@@ -56,12 +84,11 @@ def cond(var1,var2,condition):
       result = True
   return result
 def while_state(*endme):
-  delay = endme[3]
   condition = endme[1]
   var1 = endme[0]
   var2 = endme[2]
   torun = ''
-  for code in endme[4:]:
+  for code in endme[3:]:
     torun += code + ' '
   try:
     var1 = int(var1)
@@ -71,9 +98,8 @@ def while_state(*endme):
     var2 = int(var2)
   except:
     pass
-  while cond(var1,var2,condition):
+  while cond(eval_key(str(var1)),eval_key(str(var2)),condition):
     rd_line(torun)
-    time.sleep(int(delay))
 def if_state(*shit):
   #if seal < panda run seal
   var1 = shit[0]
@@ -211,6 +237,9 @@ def concat(*args):
     toconc = args[1:]
     tostore = ''
     for string in toconc:
+      if string == 'HOLD':
+        tostore += ' '
+      else:
         tostore += string
     make_variable(args[0],tostore)
 def get_variable(name):
@@ -225,6 +254,8 @@ def eval_key(keyword):
   global variables
   if keyword.startswith('*'):
     return keyword[1:]
+  if keyword.startswith('_'):
+    return ' '
   if keyword.startswith('^'):
     return read_array(keyword[1:])
   if keyword.startswith('('):
@@ -237,7 +268,7 @@ def make_variable(name,*values):
   global variables
   toapp = ''
   for value in values:
-    toapp += value + ' '
+    toapp += (value) + ' '
   num = 0
   for existing in variables:
     if existing.split(":")[0] == name:

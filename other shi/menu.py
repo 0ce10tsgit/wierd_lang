@@ -10,7 +10,7 @@ char = """
 ║   Theres a library for  ║  
 ║   these desktops on:    ║
 ║   github.com/0ce10tsgit ║
-║   some questions will   ║
-║   be asked now alr?     ║
+║   WIP but this is a     ║
+║   cool thing :)         ║
 ╚═════════════════════════╝"""
 print(char)

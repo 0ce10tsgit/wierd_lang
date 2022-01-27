@@ -1,0 +1,4 @@
+array chars h e l l o
+var temp _
+for char in chars concat temp $temp $char
+print $temp

@@ -1,2 +1,2 @@
-import lang
-lang.start()
+import lang as harp_seal
+harp_seal.init()

@@ -1,7 +1,7 @@
 {
     "do_break_math": false,
-    "do_preload" : false,
-    "preload_file" :  "main",
+    "do_preload" : true,
+    "preload_file" :  "test",
     "auto_start" : true,
     "allow_failure" : true
 }
