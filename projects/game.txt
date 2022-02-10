@@ -11,7 +11,7 @@ fn decide var num 0 & if $lvl == $pnt_lvl var num ($num+1) & if $crd == $pnt var
 fn create_point randint pnt 1 3 & randint pnt_lvl 1 3
 fn reset array b1 # # # & array b2 # # # & array b3 # # #
 fn ins concat temp b $lvl & run reset & insert $temp $crd i & concat temp b $pnt_lvl & insert $temp $pnt O & run compile
-fn compile concat temp1 ^b1|1 ^b1|2 ^b1|3 & concat temp2 ^b2|1 ^b2|2 ^b2|3 & concat temp3 ^b3|1 ^b3|2 ^b3|3 & print $temp1 & print $temp2 & print $temp3
+fn compile concat temp1 ^b1|1 ^b1|2 ^b1|3 & concat temp2 ^b2|1 ^b2|2 ^b2|3 & concat temp3 ^b3|1 ^b3|2 ^b3|3 & clear & print $temp1 & print $temp2 & print $temp3 
 fn ask input head direction? & if $head == > var crd ($crd+1) & if $head == < var crd ($crd-1) & if $head == d var lvl ($lvl+1) & if $head == u var lvl ($lvl-1) & run decide & run ins
 print controls are: <,>,u,d it should be clear what they do
 while $pnt_amount != 10 run ask

@@ -1,23 +1,106 @@
+print('PACAKGE PAIN TIME :((((')
+import os
 import time
 import random
 import json
+import colorama
+from colorama import Back, Fore, Style
+colorama.init()
 is_doing_shit = True
 variables = []
 fns = []
+arg_funcs = []
 arrays = []
-before_listeners = []
-after_listeners = []
-store_exceptions = ['make_function','while_state','for_state']
+store_exceptions = ['make_function','while_state','for_state','arg_func_make']
 def output_method(content):
-  print(content)
+  print(Fore.MAGENTA + content)
 def input_method(prompt):
   return input(prompt)
-commands = ['print:do_print','var:make_variable','concat:concat','fn:make_function','run:run_f','read:read_f','array:array_make','if:if_state','while:while_state','input:input_state','insert:insert','append:app','randint:rand','sleep:slep','for:for_state']
-def until_state(*kazoo):
-  #until after func :
-  pass
-  if kazoo[0] == 'after':
+## not implemented yet ^
+commands = ['print:do_print','var:make_variable','concat:concat','fn:make_function','run:run_f','read:read_f','array:array_make','if:if_state','while:while_state','input:input_state','insert:insert','append:app','randint:rand','sleep:slep','for:for_state','terminate:terminate','clear:clear','repeat:repeat','define:arg_func_make','call:arg_func_run','trash:delete']
+def delete(typ_e,name):
+  global arrays
+  global variables
+  if typ_e == 'array':
+    num = 0
+    for arr in arrays:
+      if arr[0] == name:
+        del arrays[num]
+      num += 1
+  elif typ_e == 'var':
+    num = 0
+    for v in variables:
+      if v.split(':')[0] == name:
+        del variables[num]
+        num += 1
+def arg_func_run(name,*args):
+  global arg_funcs
+  do_args = True
+  for fn in arg_funcs:
+    if fn.split(":")[0] == name:
+      code = fn.split(':',2)[1].split(' ')
+      print(fn.split(':',2)[2])
+      if fn.split(':',2)[2] == '|':
+        do_args = False
+      else:
+        need_args = fn.split(':',2)[2].split('|')
+      num = 0
+      current = []
+      if do_args:
+        for seel in need_args:
+          make_variable(seel,args[num])
+          num += 1
+      for state in code:
+        if state == '&':
+          temp = ''
+          for thingy in current:
+            temp += thingy + ' '
+          current = []
+          rd_line(temp.rstrip())
+        else:
+          current.append(state)
+      temp = ''    
+      for thingy in current:
+        temp += thingy + ' '
+      rd_line(temp.rstrip())
+      return;
+def arg_func_make(name,args,*code):
+  global arg_funcs
+  idk = ''
+  for c in code:
+    idk += c + ' '
+  arg_funcs.append(name + ':' + idk.rstrip() + ':' + args)
+def repeat(*harpseal):
+  code = ''
+  for shit in harpseal[1:]:
+    code += shit + ' '
+  for seal in range(0,int(harpseal[0])):
+    rd_line(code.rstrip())
+def returnables(*happi):
+  #concat seal panda
+  thingy = ''
+  for item in happi:
+    thingy += item
+  full = thingy.split('|')
+  name = eval_key(full[0])
+  rtrn = None
+  if name.startswith('>'):
     pass
+  else: 
+    if name == 'concat':
+      rtrn = ''
+      killme = full[1:]
+      for s in killme:
+        rtrn += eval_key(s)
+      return rtrn
+    elif name == 'randint':
+      return random.randint(int(full[1]),int(full[2]))
+def clear():
+  os.system('cls||clear')
+def terminate():
+  global is_doing_shit
+  is_doing_shit = False
+  return;
 def for_state(*idk):
   #for item in array
   item_name = eval_key(idk[0])
@@ -46,7 +129,7 @@ def app(*iaintgonnaliveforever):
       toapp = ''
       for item in iaintgonnaliveforever[1:]:
         toapp += item + ' '
-      arr.append(toapp)
+      arr.append(toapp.rstrip())
 def insert(*s):
   #insert seal 2 @
   global arrays
@@ -54,7 +137,7 @@ def insert(*s):
     if arr[0] == s[0]:
       arr[int(s[1])] = s[2]
       return None
-  output_method('failed')
+  raise Exception('The insert failed args: ' + str(s))
 def input_state(*itsmylife):
   variable = itsmylife[0]
   toask = '' 
@@ -145,7 +228,7 @@ def read_array(wholething):
   return arrays[acnum][int(index)]
 def array_make(name,*items):
   global arrays
-  temp = [name]
+  temp = [name] 
   for item in items:
     temp.append(item)  
   num = 0
@@ -160,7 +243,9 @@ def read_f(name):
       lines = file.readlines()
       output_method('start of: ' + name + '---------')
       for line in lines:
-        if not line.startswith('//') or not line.startswith('>') or not line.startwith('>>'):
+        if line.startswith('//'):
+          pass
+        else:
           rd_line(line.rstrip())
       output_method('end of: '+ name + '-----------')
     output_method('reading failure')
@@ -168,12 +253,12 @@ def run_f(name):
   global fns
   for fn in fns:
     if fn.split(':')[0] == name:
-      if '&' in fn.split(':')[1]:
-        content = fn.split(':')[1].split('&')
+      if '&' in fn.split(':',1)[1]:
+        content = fn.split(':',1)[1].split('&')
         for cmd in content:
           rd_line(cmd.lstrip().rstrip())
       else:
-        content = fn.split(':')[1]
+        content = fn.split(':',1)[1]
         rd_line(content)
 def make_function(name,*args):
   global fns
@@ -237,16 +322,13 @@ def concat(*args):
     toconc = args[1:]
     tostore = ''
     for string in toconc:
-      if string == 'HOLD':
-        tostore += ' '
-      else:
         tostore += string
     make_variable(args[0],tostore)
 def get_variable(name):
   global variables
   for vari in variables:
     if vari.split(":")[0] == name:
-      return vari.split(":")[1]
+      return vari.split(":",1)[1]
   return False
 def eval_key(keyword):
   if keyword == '':
@@ -254,8 +336,10 @@ def eval_key(keyword):
   global variables
   if keyword.startswith('*'):
     return keyword[1:]
+  if keyword.startswith('{'):
+    return returnables(keyword[1:])
   if keyword.startswith('_'):
-    return ' '
+    return " "
   if keyword.startswith('^'):
     return read_array(keyword[1:])
   if keyword.startswith('('):
@@ -305,11 +389,12 @@ def rd_line(line):
       eval(cmd_do + '(' + tosend + ')')
       return True
   output_method("failed")
-#stuf = ['Important messages about lang:','required: time module','incomplete: random ints not added yet but module is imported anywat for future use','incomplete: math function does not currently support equation in equation']
 def start():
   global is_doing_shit
+  output_method('======Lang has started=====================')
   while is_doing_shit:
     rd_line(input_method("cmd? "))
+  output_method('======Lang has terminated==================')
 settings = None
 with open('lang_config.json') as config:
     settings = json.load(config)

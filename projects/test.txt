@@ -1,8 +1,4 @@
-print guessing shit
-input sol what number?
-input cap 0 to what number should I guess?
-var guess 2
-var count 0
-fn guess_once randint guess 0 $cap & print $guess & var count ($count+1)
-while $guess != $sol run guess_once
-print it took $count guesses to get ur num
+define add operand1|operand2 print testing & print ($operand1+$operand2)
+call add 1 2
+call add 3 5
+call add -4 5

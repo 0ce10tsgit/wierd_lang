@@ -1,0 +1,3 @@
+var height 10
+var len 40
+for item 

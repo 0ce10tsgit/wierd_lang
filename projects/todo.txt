@@ -1,0 +1,11 @@
+print todo/ideas list
+print 1. Multiple condition conditionals
+print 2. Returnable statements with {
+print 3. Until state run until a function is called
+print 4. color choosing
+print 5. Multi line option for function
+print 6. Optimise where possible more breaks and returns in loops
+print 7. do more projects using compiliar
+print 8. temporary just conditions
+print 9. fix the < and > for conditionals
+print 10. Switch over to dict types WHY WAS I NOT IN THE FIRST PLACE SAHIJFHAKJSFHKJSAFKJASHFKJASHFKJASHFKJASHFKJASHFJKASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS

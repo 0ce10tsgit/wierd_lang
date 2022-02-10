@@ -1,0 +1,33 @@
+//Creates the board
+var height 5
+var width 20
+var num 0
+var snowman ☃
+var tree 🎄
+var tile *_
+var speed 1
+var sprite $snowman
+//grapgics generator
+fn app2 append $temp1 $tile & var num3 ($num3+1)
+fn app array $temp1 $tile & var num3 1 & while $num3 != $width run app2 
+fn create concat temp1 array $num  & run app & var num ($num+1)
+fn refresh var num 0 & while $num != $height run create
+// prints the board
+fn prin concat temp1 array $num & var num ($num+1) & var temp2 _ & for item in $temp1 concat temp2 $temp2 $item & print $temp2
+fn display var num 0 & while $num != $height run prin
+fn render_character concat temp3 array $r_y & insert $temp3 $r_x $trgt
+fn snowdude var r_x $x & var r_y $y & var trgt $sprite & run render_character
+fn things run snowdude
+fn frame clear & run refresh & run things & run display
+//define make_tree |xc|yc insert {concat|array|$yc $xc $tree
+//end graphics generator
+print this is a self making game u make it do wat u want
+//input height height(int)?
+//input width width(int)?
+//input tile tile(anything)?
+//input sprite sprite(one char pls)?
+//input speed speed(int)?
+var x 10
+var y 3
+fn control input dir direction? & if $dir == u var y ($y-$speed) & if $dir == d var y ($y+$speed) & if $dir == > var x ($x+$speed) & if $dir == < var x ($x-$speed) & run frame
+while 1 < 10 run control
