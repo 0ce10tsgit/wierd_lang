@@ -1,3 +1,14 @@
-var height 10
-var len 40
-for item 
+var rows 10
+var len 20
+var tile *_
+define thingy | array {concat|arr|$num _ & repeat $len append {concat|arr|$num $tile & var num ($num+1)
+define generate | var num 1 & while $num != ($rows+1) call thingy
+define thingy2 | var temp _ & for item in {concat|arr|$num var temp {concat|$temp|$item & print {concat|arr|$num & print $temp & var num ($num+1)
+define prin | var num 1 & while $num != ($rows+1) call thingy2
+define add_sprite w_x|w_y|trgt insert {concat|arr|($w_x-1) $w_y $trgt
+call generate
+var x 10
+var y 3
+call add_sprite $y $x O
+call prin 
+define frame

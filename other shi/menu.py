@@ -13,4 +13,5 @@ char = """
 ║   WIP but this is a     ║
 ║   cool thing :)         ║
 ╚═════════════════════════╝"""
-print(char)
+for c in char:
+  print(char)

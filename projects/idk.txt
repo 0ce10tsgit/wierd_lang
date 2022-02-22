@@ -9,7 +9,7 @@ var speed 1
 var sprite $snowman
 //grapgics generator
 fn app2 append $temp1 $tile & var num3 ($num3+1)
-fn app array $temp1 $tile & var num3 1 & while $num3 != $width run app2 
+fn app array $temp1 $tile & var num3 0 & while $num3 != $width run app2 
 fn create concat temp1 array $num  & run app & var num ($num+1)
 fn refresh var num 0 & while $num != $height run create
 // prints the board
@@ -17,9 +17,9 @@ fn prin concat temp1 array $num & var num ($num+1) & var temp2 _ & for item in $
 fn display var num 0 & while $num != $height run prin
 fn render_character concat temp3 array $r_y & insert $temp3 $r_x $trgt
 fn snowdude var r_x $x & var r_y $y & var trgt $sprite & run render_character
-fn things run snowdude
+fn things run snowdude & call make_tree 12 3
 fn frame clear & run refresh & run things & run display
-//define make_tree |xc|yc insert {concat|array|$yc $xc $tree
+define make_tree xc|yc insert {concat|array|$yc $xc $tree
 //end graphics generator
 print this is a self making game u make it do wat u want
 //input height height(int)?
@@ -29,5 +29,5 @@ print this is a self making game u make it do wat u want
 //input speed speed(int)?
 var x 10
 var y 3
-fn control input dir direction? & if $dir == u var y ($y-$speed) & if $dir == d var y ($y+$speed) & if $dir == > var x ($x+$speed) & if $dir == < var x ($x-$speed) & run frame
+fn control input dir direction? & if $dir == u var y ($y-$speed) & if $dir == d var y ($y+$speed) & if $dir == > var x ($x+$speed) & if $dir == < var x ($x-$speed) & run frame & print $y
 while 1 < 10 run control

@@ -5,17 +5,18 @@ import random
 import json
 import colorama
 from colorama import Back, Fore, Style
-colorama.init()
+colorama.init(autoreset=True)
 is_doing_shit = True
 variables = []
 fns = []
 arg_funcs = []
 arrays = []
-store_exceptions = ['make_function','while_state','for_state','arg_func_make']
+pairings = []
+store_exceptions = ['make_function','while_state','for_state','arg_func_make','repeat']
 def output_method(content):
-  print(Fore.MAGENTA + content)
+  print(Fore.CYAN + content)
 def input_method(prompt):
-  return input(prompt)
+  return input(Fore.RED + prompt)
 ## not implemented yet ^
 commands = ['print:do_print','var:make_variable','concat:concat','fn:make_function','run:run_f','read:read_f','array:array_make','if:if_state','while:while_state','input:input_state','insert:insert','append:app','randint:rand','sleep:slep','for:for_state','terminate:terminate','clear:clear','repeat:repeat','define:arg_func_make','call:arg_func_run','trash:delete']
 def delete(typ_e,name):
@@ -33,13 +34,18 @@ def delete(typ_e,name):
       if v.split(':')[0] == name:
         del variables[num]
         num += 1
+  elif typ_e == 'item':
+    num = 0
+    for arr in arrays:
+      if arr[0] == name.split('|')[0]:
+        del arrays[num][int(name.split('|')[1])]
+    num += 1
 def arg_func_run(name,*args):
   global arg_funcs
   do_args = True
   for fn in arg_funcs:
     if fn.split(":")[0] == name:
       code = fn.split(':',2)[1].split(' ')
-      print(fn.split(':',2)[2])
       if fn.split(':',2)[2] == '|':
         do_args = False
       else:
@@ -74,7 +80,7 @@ def repeat(*harpseal):
   code = ''
   for shit in harpseal[1:]:
     code += shit + ' '
-  for seal in range(0,int(harpseal[0])):
+  for seal in range(0,int(eval_key(harpseal[0]))):
     rd_line(code.rstrip())
 def returnables(*happi):
   #concat seal panda
@@ -91,7 +97,7 @@ def returnables(*happi):
       rtrn = ''
       killme = full[1:]
       for s in killme:
-        rtrn += eval_key(s)
+        rtrn += str(eval_key(s))
       return rtrn
     elif name == 'randint':
       return random.randint(int(full[1]),int(full[2]))
@@ -146,6 +152,14 @@ def input_state(*itsmylife):
   sel = input_method(toask)
   make_variable(variable,sel)
 def cond(var1,var2,condition):
+  try:
+    var1 = int(var1)
+  except:
+    pass
+  try:
+    var2 = int(var2)
+  except:
+    pass
   result = False
   if condition == '<':
     if var1 < var2:
@@ -367,6 +381,7 @@ def do_print(*args):
     output_method(toprin)
     return True
 def rd_line(line):
+  global arrays
   global commands
   global store_exceptions
   args = None
